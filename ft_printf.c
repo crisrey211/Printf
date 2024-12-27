@@ -19,12 +19,42 @@ void ft_putstr(char *c, size_t *printed_chars_counter)
     }
 }
 
+void ft_putptr(void *ptr, size_t *printed_chars_counter)
+{
+    char *str;
+    unsigned long ptr_address;
+
+    ptr_address = (unsigned long)ptr;
+}
+void ft_putnbr(int  num, size_t *printed_chars_counter)
+{
+    if (num == -2147483648)
+        write(1, "-2147483648", 11);
+    else if (num < 0)
+    {
+        ft_putchar('-', printed_chars_counter);
+        num = -num;
+        ft_putnbr(num, printed_chars_counter);
+    }
+    else if (num > 9)
+    {
+       ft_putnbr((num / 10), printed_chars_counter);
+       ft_putnbr((num % 10), printed_chars_counter);
+    }
+    else
+        ft_putchar(num + 48, printed_chars_counter);
+}
+
 void ft_selector(char *str, size_t *printed_chars_counter, va_list vargs)
 {
     if (*str == 'c')
         ft_putchar(va_arg(vargs, int), printed_chars_counter);
     else if (*str == 's')
         ft_putstr(va_arg(vargs, char*), printed_chars_counter);
+    else if (*str == 'p')
+        ft_putptr(va_arg(vargs, void*), printed_chars_counter);
+    else if (*str == 'd' || *str == 'i')
+        ft_putnbr(va_arg(vargs, int), printed_chars_counter);
 }
 
 int ft_printf(char const *str, ...) {
