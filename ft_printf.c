@@ -45,6 +45,13 @@ void ft_putnbr(int  num, size_t *printed_chars_counter)
         ft_putchar(num + 48, printed_chars_counter);
 }
 
+void ft_puthex(unsigned int num)
+{
+    char *str;
+
+    free(str);
+}
+
 void ft_selector(char *str, size_t *printed_chars_counter, va_list vargs)
 {
     if (*str == 'c')
@@ -55,6 +62,12 @@ void ft_selector(char *str, size_t *printed_chars_counter, va_list vargs)
         ft_putptr(va_arg(vargs, void*), printed_chars_counter);
     else if (*str == 'd' || *str == 'i')
         ft_putnbr(va_arg(vargs, int), printed_chars_counter);
+    else if (*str == 'x' || *str == 'X')
+{
+    
+}
+     else if (*str == '%')
+         ft_putchar(*str, printed_chars_counter);
 }
 
 int ft_printf(char const *str, ...) {
