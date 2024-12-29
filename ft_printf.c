@@ -64,7 +64,10 @@ void ft_selector(char *str, size_t *printed_chars_counter, va_list vargs)
         ft_putnbr(va_arg(vargs, int), printed_chars_counter);
     else if (*str == 'x' || *str == 'X')
 {
-    
+    if (*str == 'x')
+			ft_puthex(va_arg(va, unsigned int), printed_chars_counter, );
+		else
+			ft_puthex(va_arg(va, unsigned int), printed_chars_counter, );
 }
      else if (*str == '%')
          ft_putchar(*str, printed_chars_counter);
