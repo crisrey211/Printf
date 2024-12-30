@@ -1,4 +1,5 @@
 
+/* #include "ft_printf.h" */
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -45,12 +46,69 @@ void ft_putnbr(int  num, size_t *printed_chars_counter)
         ft_putchar(num + 48, printed_chars_counter);
 }
 
-void ft_puthex(unsigned int num)
+/* Functions to HEX */
+void ft_puthex(unsigned int num, size_t *printed_chars_counter, char *base)
 {
     char *str;
 
+    str = ft_convert_to_base(num, base);
+    ft_putstr(str, printed_chars_counter);
     free(str);
 }
+
+char *ft_convert_to_base(unsigned long long n, char *base)
+{
+    char    *str;
+    int     digits;
+    int     base_len;
+
+    digits = get_num_digits_in_base(n, base);
+    base_len = ft_strlen(base);
+    str = ft_calloc((digits + 1), sizeof(char));
+    if (!str)
+        return (NULL);
+
+}
+
+size_t get_num_digits_in_base(unsigned long long n, char *base)
+{
+    size_t              len;
+    unsigned long long	base_len;
+
+    len = 1;
+    base_len = ft_strlen(base);
+    while (n >= base_len)
+    {
+        n = n / base_len;
+        len++;
+    }
+    return (len);
+}
+
+/* aux Functions  */
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	unsigned char	*tmp;
+
+	tmp = malloc(nmemb * size);
+	if (!tmp)
+		return (NULL);
+	ft_memset(tmp, 0, nmemb * size);
+	return (tmp);
+}
+
+/* aux Functions  */
 
 void ft_selector(char *str, size_t *printed_chars_counter, va_list vargs)
 {
@@ -65,9 +123,9 @@ void ft_selector(char *str, size_t *printed_chars_counter, va_list vargs)
     else if (*str == 'x' || *str == 'X')
 {
     if (*str == 'x')
-			ft_puthex(va_arg(va, unsigned int), printed_chars_counter, );
+			ft_puthex(va_args(vargs, unsigned int), printed_chars_counter, HEX_LOW_BASE);
 		else
-			ft_puthex(va_arg(va, unsigned int), printed_chars_counter, );
+			ft_puthex(va_args(vargs, unsigned int), printed_chars_counter, HEX_UPP_BASE);
 }
      else if (*str == '%')
          ft_putchar(*str, printed_chars_counter);
