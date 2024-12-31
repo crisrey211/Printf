@@ -123,9 +123,9 @@ void ft_selector(char *str, size_t *printed_chars_counter, va_list vargs)
     else if (*str == 'x' || *str == 'X')
 {
     if (*str == 'x')
-			ft_puthex(va_args(vargs, unsigned int), printed_chars_counter, HEX_LOW_BASE);
-		else
-			ft_puthex(va_args(vargs, unsigned int), printed_chars_counter, HEX_UPP_BASE);
+        ft_puthex(va_args(vargs, unsigned int), printed_chars_counter, "0123456789abcdef");
+    else
+        ft_puthex(va_args(vargs, unsigned int), printed_chars_counter, "0123456789ABCDEF");
 }
      else if (*str == '%')
          ft_putchar(*str, printed_chars_counter);
