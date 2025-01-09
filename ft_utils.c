@@ -6,7 +6,7 @@
 /*   By: creynalt <creynalt@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:15:09 by creynalt          #+#    #+#             */
-/*   Updated: 2025/01/09 13:07:38 by creynalt         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:41:30 by creynalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void	ft_putptr(void	*ptr,	size_t	*printed_chars_counter)
 	unsigned long	ptr_address;
 
 	ptr_address = (unsigned long)ptr;
+	ft_putstr("0x", printed_chars_counter);
+	str = ft_convert_to_base(ptr_address, HEX_LOW_BASE);
+	ft_putstr(str, printed_chars_counter);
+	free(str);
 }
 
 void	ft_putnbr(int num, size_t *printed_chars_counter)

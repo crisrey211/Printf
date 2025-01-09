@@ -6,7 +6,7 @@
 /*   By: creynalt <creynalt@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:33:33 by creynalt          #+#    #+#             */
-/*   Updated: 2025/01/09 13:07:28 by creynalt         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:41:12 by creynalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ char	*ft_convert_to_base(unsigned long long n, char	*base)
 	str = ft_calloc ((digits + 1), sizeof(char));
 	if (!str)
 		return (NULL);
+	while (digits)
+	{
+		digits = digits - 1;
+		str[digits] = base[n % base_len];
+		n = n / base_len;
+	}
+	return (str);
 }
 
 void	*ft_memset(void *s, int c, size_t n)

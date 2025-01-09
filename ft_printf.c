@@ -6,11 +6,20 @@
 /*   By: creynalt <creynalt@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 17:04:20 by creynalt          #+#    #+#             */
-/*   Updated: 2025/01/09 13:36:44 by creynalt         ###   ########.fr       */
+/*   Updated: 2025/01/09 16:03:56 by creynalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_putuint(unsigned int num, size_t *counter)
+{
+	char	*str;
+
+	str = ft_convert_to_base(num, "0123456789");
+	ft_putstr(str, counter);
+	free(str);
+}
 
 void	ft_selector(char *str, size_t *chars_counter, va_list vargs)
 {
@@ -22,6 +31,8 @@ void	ft_selector(char *str, size_t *chars_counter, va_list vargs)
 		ft_putptr(va_arg(vargs, void *), chars_counter);
 	else if (*str == 'd' || *str == 'i')
 		ft_putnbr(va_arg(vargs, int), chars_counter);
+	else if (*str == 'u')
+		ft_putuint(va_arg(vargs, unsigned int), chars_counter);
 	else if (*str == 'x' || *str == 'X')
 	{
 		if (*str == 'x')
